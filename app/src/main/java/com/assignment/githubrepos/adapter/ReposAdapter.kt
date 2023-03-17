@@ -49,6 +49,7 @@ class ReposAdapter() :
 
     }
 }
+
 object RepoDiffCallback : DiffUtil.ItemCallback<GithubRepository>() {
     override fun areItemsTheSame(oldItem: GithubRepository, newItem: GithubRepository): Boolean {
         return oldItem == newItem

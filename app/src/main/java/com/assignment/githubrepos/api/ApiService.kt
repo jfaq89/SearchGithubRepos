@@ -7,6 +7,8 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("search/repositories")
-    suspend fun searchRepositories(@Query("q") searchTerm: String,@Query("page") page: String): Response<GithubRepositories>
-
+    suspend fun searchRepositories(
+        @Query("q") searchTerm: String,
+        @Query("page") page: String
+    ): Response<GithubRepositories>
 }

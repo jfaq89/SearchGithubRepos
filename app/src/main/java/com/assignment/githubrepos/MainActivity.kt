@@ -14,14 +14,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupObserver()
+        setupUIandObservers()
+    }
+
+    private fun setupUIandObservers() {
         val repoAdapter = ReposAdapter()
-        val searchField : EditText = findViewById(R.id.edSearch)
-        searchField.doOnTextChanged { text, _, _, _ -> viewModel.searchRepositories(text.toString())  }
+        val searchField: EditText = findViewById(R.id.edSearch)
+        searchField.doOnTextChanged { text, _, _, _ -> viewModel.searchRepositories(text.toString()) }
         val recyclerView: RecyclerView = findViewById(R.id.rcv_Repos)
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -38,13 +41,5 @@ class MainActivity : AppCompatActivity() {
         viewModel.repos.observe(this) {
             repoAdapter.submitList(it.items)
         }
-
     }
-
-    private fun setupObserver() {
-
-    }
-
-
-
 }
